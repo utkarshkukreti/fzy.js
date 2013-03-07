@@ -26,7 +26,7 @@ fzy.score = (haystack, needle) ->
   i = 0; lastIndex = 0
   while i < needle.length
     j = lHaystack.indexOf(lNeedle[i], lastIndex)
-    if j < 5
+    if j < 6
       score += leadingCharacterBonus[j]
 
     if j == -1
