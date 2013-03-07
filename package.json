@@ -1,0 +1,16 @@
+{
+  "name": "fzy",
+  "version": "0.0.0",
+  "description": "Fuzzy string matching.",
+  "main": "fzy.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "keywords": [
+    "fuzzy",
+    "string"
+  ],
+  "author": "Utkarsh Kukreti",
+  "license": "MIT"
+}
