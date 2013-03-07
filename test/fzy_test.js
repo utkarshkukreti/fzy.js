@@ -13,7 +13,7 @@
   describe("fzy", function() {
     var inputs;
     inputs = [".gitignore", "Gemfile", "LICENSE.txt", "README.md", "Rakefile", "bin/ln2", "lib/ln2.rb", "lib/ln2/Guardfile", "lib/ln2/version.rb", "lib/ln2/watchers.rb", "ln2.gemspec"];
-    return it("works on files", function() {
+    it("works on files", function() {
       var f;
       f = function(needle, haystack) {
         return expect(fzy.sort(inputs, needle)[0]).to.eq(haystack);
@@ -27,6 +27,22 @@
       f("gsp", "ln2.gemspec");
       f("ln2", "ln2.gemspec");
       return f("m", "README.md");
+    });
+    it("returns at most options.limit results", function() {
+      expect(fzy.sort(inputs, "", {
+        limit: 3
+      })).to.have.length(3);
+      return expect(fzy.sort(inputs, "", {
+        limit: 100
+      })).to.have.length(inputs.length);
+    });
+    return it("wraps results in options.wrap tag", function() {
+      expect(fzy.sort(inputs, "gf", {
+        wrap: "em"
+      })[0]).to.eq("<em>G</em>em<em>f</em>ile");
+      return expect(fzy.sort(["aabbcc"], "abc", {
+        wrap: "em"
+      })[0]).to.eq("<em>a</em>a<em>b</em>b<em>c</em>c");
     });
   });
 

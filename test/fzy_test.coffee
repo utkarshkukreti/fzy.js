@@ -32,3 +32,13 @@ describe "fzy", ->
     f "gsp", "ln2.gemspec"
     f "ln2", "ln2.gemspec"
     f "m", "README.md"
+
+  it "returns at most options.limit results", ->
+    expect(fzy.sort(inputs, "", limit: 3)).to.have.length 3
+    expect(fzy.sort(inputs, "", limit: 100)).to.have.length inputs.length
+
+  it "wraps results in options.wrap tag", ->
+    expect(fzy.sort(inputs, "gf", wrap: "em")[0]).
+      to.eq "<em>G</em>em<em>f</em>ile"
+    expect(fzy.sort(["aabbcc"], "abc", wrap: "em")[0]).
+      to.eq "<em>a</em>a<em>b</em>b<em>c</em>c"

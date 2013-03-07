@@ -3,9 +3,11 @@ fzy = {}
 module?.exports = fzy: fzy
 window?.fzy = fzy
 
-fzy.sort = (haystacks, needle) ->
+fzy.sort = (haystacks, needle, options = {}) ->
   haystacks.map (haystack, index) ->
     index: index, haystack: haystack, score: fzy.score haystack, needle
+  .filter (object) ->
+    needle.length == 0 || object.score > 0
   .sort (left, right) ->
     # Ascending sort by index
     if left.score == right.score
@@ -13,8 +15,21 @@ fzy.sort = (haystacks, needle) ->
     # Descending by score
     else
       right.score - left.score
+  .slice(0, options.limit || haystacks.length)
   .map (object) ->
-    object.haystack
+    if options.wrap
+      haystack = object.haystack
+      i = 0; j = 0; result = ""
+      while i < haystack.length && j < needle.length
+        if haystack[i].toLowerCase() == needle[j].toLowerCase()
+          result += "<#{options.wrap}>#{haystack[i]}</#{options.wrap}>"
+          j++
+        else
+          result += haystack[i]
+        i++
+      result + haystack.substr(i, haystack.length - i)
+    else
+      object.haystack
 
 leadingCharacterBonus = [5, 3, 1, 0.5, 0.5, 0.5]
 
