@@ -12,5 +12,9 @@
     "string"
   ],
   "author": "Utkarsh Kukreti",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  }
 }
