@@ -40,9 +40,12 @@
       expect(fzy.sort(inputs, "gf", {
         wrap: "em"
       })[0]).to.eq("<em>G</em>em<em>f</em>ile");
-      return expect(fzy.sort(["aabbcc"], "abc", {
+      expect(fzy.sort(["aabbcc"], "abc", {
         wrap: "em"
       })[0]).to.eq("<em>a</em>a<em>b</em>b<em>c</em>c");
+      return expect(fzy.sort(["abbcccddddcccbba"], "bddcc", {
+        wrap: "em"
+      })[0]).to.eq("a<em>b</em>bccc<em>d</em><em>d</em>dd<em>c</em><em>c</em>cbba");
     });
   });
 
